@@ -15,13 +15,16 @@ const TasksSlice = createSlice({
         const lastElment = state.tasks.at(-1);
         state.tasks.push({ id: lastElment.id + 1, ...payload });
       }
-      
     },
-    removeTask:(state,{payload})=>{
-        state.tasks.filter(item=>item.id !==payload)
-    }
+    removeTask: (state, { payload }) => {
+      state.tasks.filter((item) => item.id !== payload);
+    },
+    updateStatus: (state, { payload }) => {
+      const target=state.tasks.find((item) => item.id == payload.id);
+      target.status=payload.status;
+    },
   },
 });
-export const { addTask } = TasksSlice.actions;
+export const { addTask,removeTask,updateStatus } = TasksSlice.actions;
 
 export default TasksSlice.reducer;
